@@ -141,11 +141,11 @@ saveWidget(dis_cloud, "아프리카 돼지열병.html", selfcontained = F) # htm
 
 # 감성분석하기
 
-library(twitteR)
+#library(twitteR)  # 앞에서 선언함
 library(plyr)
 library(stringr)
 
-source("authenticate.R") # 토큰 인증
+#source("authenticate.R") # 토큰 인증 # 앞에서 선언함
 
 score.sentiment = function(sentences, pos.words, neg.words)
 {
@@ -181,7 +181,7 @@ neg.words <- readLines("neg_pol_word.txt", encoding = "UTF-8")  # 부정 사전
 
 
 
-# 아까 분석했었던 트위터를 
+# 아까 분석했었던 트위터를 저장
 disease_txt <- sapply(disease, function(x) x$getText(), USE.NAMES=F)
 write.csv(disease_txt, "돼지열병 트위터 내용.txt")
 
@@ -235,6 +235,6 @@ qplot(price.score$score, xlab = "감성 점수", ylab = "개수")+
 # xlab, ylab으로 x축, y축 이름 정해줌
 # 그래프는 테두리가 검은색인 파란색 히스토그램을 그렸다.
 
-# qplot 저장하기
+# qqplot 저장하기
 ggsave(file = "C:/Users/XPS/Desktop/대학교 자료/공부/대학교/정보통계학과/3-2학기/빅데이터입문/기말과제/bargraph3.jpg",
 		width = 3.5, height = 5)
