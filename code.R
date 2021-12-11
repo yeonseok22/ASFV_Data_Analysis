@@ -34,6 +34,7 @@ write(df_disease$text, '돼지열병 검색어 데이터.txt')
 write(df_disease$text, '돼지열병 검색어 데이터.csv')  
                                      # 돼지열병 데이터프레임 csv파일로 저장
 
+# 
 disease.text <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", df_disease$text)  
                                               # 리트윗 제거  
 disease.text <- gsub("http\\w+", "", disease.text) # 링크 제거
