@@ -198,3 +198,62 @@
   saveWidget(dis_cloud, "아프리카 돼지열병.html", selfcontained = F) # html파일로 저장
   ```
   
+  - wordcloud 패키지를 이용한 워드 클라우드 결과
+  ![image](https://user-images.githubusercontent.com/49339278/145690037-ebe437d2-2128-47fc-9aa7-d4f4253083f1.png)
+
+  - wordcloud2 패키지를 이용한 워드 클라우드 결과
+  ![image](https://user-images.githubusercontent.com/49339278/145690058-ca56f6b1-7fe3-45df-96a7-1b0f22756546.png)
+
+### 4. 돼지고기 가격에 관한 감성 분석
+- 이용할 패키지를 설치 및 실행시킨다. 그리고 감성분석할 때 트위터 api 인증을 받아야 하지만, 위에서 이미 인증 받았으므로 과정은 생략한다.
+  ```R
+  install.packages("plyr")
+  
+  library(twitteR)
+  library(plyr)
+  library(stringr)
+  ```
+  
+- 문장에 대한 전처리 과정을 실시하고, 긍정사전과 부정사전을 매칭 시켜서 나온 감성점수를 반환하고, 각각의 문장과 점수를 데이터프레임으로 변환시키는 함수를 실행한다.
+  ```R
+  score.sentiment = function(sentences, pos.words, neg.words)
+  {
+
+     scores = laply(sentences, 
+     function(sentence, pos.words, neg.words)
+     {
+        sentence = gsub("[[:punct:]]", "", sentence) # 문장부호 제거
+        sentence = gsub("[[:cntrl:]]", "", sentence) # 특수문자 제거
+        sentence = gsub('\\d+', '', sentence)	   # 숫자 제거
+
+        word.list = strsplit(sentence, "\\s+")	   # 문장을 '빈칸'으로 나눔
+                     # \\s+ : 빈칸 1칸 이상을 의미함.
+        words = unlist(word.list)
+
+        pos.matches = match(words, pos.words)	   # words의 단어를 positive에서 맞춘다.
+        neg.matches = match(words, neg.words)	   # words의 단어를 negative에서 맞춘다.
+
+        pos.matches = !is.na(pos.matches)		   # NA 제거함. 위치(숫자)만 추출함.
+        neg.matches = !is.na(neg.matches)
+
+        score = sum(pos.matches) - sum(neg.matches)  # score = 긍정점수 - 부정점수
+        return(score)					   # score값 반환
+      }, pos.words, neg.words)
+
+     scores.df = data.frame(text=sentences, score=scores) # 각각의 문장과 점수를 데이터프레임으로 변환
+     return(scores.df)
+  } 					# 문장을 감성 점수를 측정하는 함수
+
+  ```
+
+- 군산대학교에서 만든 감성사전에 있는 긍정 사전과 부정 사전을 변수에 저장한다.
+  ```R
+  # 군산대에서 만든 감성사전에 있는 positive_KNU.txt와 negative_KNU.txt를 변수에 불러오기
+  pos.words <- readLines("pos_pol_word.txt", encoding = "UTF-8")  # 긍정 사전
+  neg.words <- readLines("neg_pol_word.txt", encoding = "UTF-8")  # 부정 사전
+  ```
+  
+- 
+### 5. 결론
+### 6. 프로젝트 진행 후 느낀 점
+### 7. 참고자료
