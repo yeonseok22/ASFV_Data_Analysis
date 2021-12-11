@@ -1,8 +1,4 @@
-# 트위터로 데이터 가지고 오기
-
-setwd('C:/Users/XPS/Desktop/대학교 자료/공부/대학교/정보통계학과/3-2학기/빅데이터입문/기말과제') # 작업 디렉토리 지정
-
-install.packages("twitteR")
+install.packages("twitteR") # 트위터로 데이터 가지고 오기
 install.packages("KoNLP")
 install.packages("wordcloud")
 install.packages("stringr")
@@ -12,6 +8,13 @@ library(twitteR)
 library(stringr)
 library(KoNLP)
 library(wordcloud)
+
+#setwd('C:/Users/XPS/Desktop/대학교 자료/공부/대학교/정보통계학과/3-2학기/빅데이터입문/기말과제') # 기존 작업 디렉토리
+
+# 작업 디렉토리 지정
+dir <- choose.dir()
+setwd(dir)
+
 
 source("authenticate.R") # 토큰 인증
 
