@@ -35,15 +35,11 @@ write(df_disease$text, '돼지열병 검색어 데이터.csv')
                                      # 돼지열병 데이터프레임 csv파일로 저장
 
 # 전처리 과정
-disease.text <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", df_disease$text)  
-                                              # 리트윗 제거  
+disease.text <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", df_disease$text)    # 리트윗 제거  
 disease.text <- gsub("http\\w+", "", disease.text) # 링크 제거
-disease.text <- gsub("@[a-z]*", "", disease.text) 
-                                      # @로 시작하는 영어소문자 0개 이상을 제거
-disease.text <- gsub("&[a-z]*", "", disease.text) 
-                                      # &로 시작하는 영어소문자 0개 이상을 제거
-disease.text <- gsub("#[a-z]*", "", disease.text) 
-                                      # #로 시작하는 영어소문자 0개 이상을 제거
+disease.text <- gsub("@[a-z]*", "", disease.text)    # @로 시작하는 영어소문자 0개 이상을 제거
+disease.text <- gsub("&[a-z]*", "", disease.text)    # &로 시작하는 영어소문자 0개 이상을 제거
+disease.text <- gsub("#[a-z]*", "", disease.text)    # #로 시작하는 영어소문자 0개 이상을 제거
 disease.text <- gsub("RT", "", disease.text)     # RT 제거
 
 
@@ -58,7 +54,7 @@ dis_words <- gsub(keyword1, "", dis_words) # 키워드 지우기
 dis_words <- gsub("\\d+", "", dis_words)    # 숫자 지우기
 dis_words <- gsub("[A-z]", "", dis_words)	  # 모든 영문자 지우기
 dis_words <- gsub("▶*", "", dis_words)	  # ▶로 시작되는 것들 지우기
-dis_words <- gsub("ð*", "", dis_words)	  # ð로 시작되는 거들 지우기
+dis_words <- gsub("ð*", "", dis_words)	  # ð로 시작되는 것들 지우기
 dis_words <- gsub("아프리카+|열병", "", dis_words)
 dis_words <- gsub("돼지", "", dis_words)
 dis_words <- gsub("가고|가능|가에", "", dis_words)
