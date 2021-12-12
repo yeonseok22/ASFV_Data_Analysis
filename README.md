@@ -3,7 +3,7 @@
 - ASFV : African Swine Fever Virus(아프리카 돼지열병 바이러스)
 
 ### Stacks & Skills
-<img alt="R" src ="https://img.shields.io/badge/R-276DC3.svg?&style=for-the-badge&logo=R&logoColor=white"/><img alt="Twitter API" src ="https://img.shields.io/badge/Twitter API-1DA1F2.svg?&style=for-the-badge&logo=Twitter&logoColor=white"/>
+<img alt="R" src ="https://img.shields.io/badge/R-276DC3.svg?&style=for-the-badge&logo=R&logoColor=white"/>  <img alt="Twitter API" src ="https://img.shields.io/badge/Twitter API-1DA1F2.svg?&style=for-the-badge&logo=Twitter&logoColor=white"/>
 
 
 ### 목차
