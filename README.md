@@ -8,6 +8,7 @@
 
 ### 목차
 ---
+[R 코드 전문](https://github.com/yeonseoksong/ASFV_Data_Analysis/blob/main/code.R)
 1. 분석 배경
 2. 본인의 역할
 3. 아프리카 돼지열병에 관한 워드 클라우드 및 감성 분석
@@ -27,7 +28,7 @@
 - 프로젝트에 필요한 데이터 수집, 데이터 전처리, 데이터 시각화 및 분석
 - 프로젝트 분석 결과 정리
 
-[R 코드 전문](https://github.com/yeonseoksong/ASFV_Data_Analysis/blob/main/code.R)
+
 
 ### 3. 아프리카 돼지열병에 관한 워드 클라우드 및 감성 분석
 
