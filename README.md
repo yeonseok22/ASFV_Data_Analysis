@@ -331,10 +331,10 @@
 
 ### 7. 참고자료
 - 서론 부분
-http://goodnews1.com/news/news_view.asp?seq=91750 - 돼지열병 관련 뉴스기사
-http://www.mafra.go.kr/FMD-AI/1511/subview.do – 농림축산식품부 아프리카돼지열병 관련 자료
+  - [돼지열병 관련 기사](http://goodnews1.com/news/news_view.asp?seq=91750)
+  - [농림축산식품부 아프리카돼지열병 관련 자료](http://www.mafra.go.kr/FMD-AI/1511/subview.do)
 - R코드 참고
-http://127.0.0.1:20482/library/twitteR/html/search.html - searchTwitter()에 관한 내용
-https://github.com/Lchiffon/wordcloud2/issues/8 - wordcloud2 저장하는 방법
-http://www.dodomira.com/2016/03/18/ggplot2-%EA%B8%B0%EC%B4%88/ - qqplot()에 대한 내용
+  - [searchTwitter()에 관한 내용](http://127.0.0.1:20482/library/twitteR/html/search.html)
+  - [wordlcloud2 저장하는 방법](https://github.com/Lchiffon/wordcloud2/issues/8)
+  - [ggplot()에 대한 내용](http://www.dodomira.com/2016/03/18/ggplot2-%EA%B8%B0%EC%B4%88/)
 - 빅데이터입문 교재
