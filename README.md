@@ -50,7 +50,6 @@
   setwd(dir)
   ```
   
-- (트위터 api에 대한 설명)
 - 트위터 api 토큰을 인증받은 후, searchTwitter로 키워드를 검색 후 데이터를 수집한다. 한글은 따로 인코딩하여 UTF-8로 변환 시켜야 한다.
   ```R
   source("authenticate.R") # 토큰 인증
