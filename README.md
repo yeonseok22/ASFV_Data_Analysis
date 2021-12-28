@@ -204,7 +204,7 @@
   - wordcloud2 패키지를 이용한 워드 클라우드 결과
   ![image](https://user-images.githubusercontent.com/49339278/145690058-ca56f6b1-7fe3-45df-96a7-1b0f22756546.png)
 
-### 4. 돼지고기 가격에 관한 감성 분석
+### 4. 아프리카 돼지열병에 관한 감성분석
 - 이용할 패키지를 설치 및 실행시킨다. 그리고 감성분석할 때 트위터 api 인증을 받아야 하지만, 위에서 이미 인증 받았으므로 과정은 생략한다.
   ```R
   install.packages("plyr")
@@ -253,7 +253,87 @@
   neg.words <- readLines("neg_pol_word.txt", encoding = "UTF-8")  # 부정 사전
   ```
   
-- 
-### 5. 결론
-### 6. 프로젝트 진행 후 느낀 점
+- 아까 분석했었던 트위터 데이터를 사용한다.
+  ```R
+  disease_txt <- sapply(disease, function(x) x$getText(), USE.NAMES=F)
+  write.csv(disease_txt, "돼지열병 트위터 내용.txt")   # 저장하기
+
+  disease.score <- score.sentiment(disease_txt, pos.words, neg.words)
+  table(disease.score$score)
+  mean(disease.score$score)
+  ```
+  ![image](https://user-images.githubusercontent.com/49339278/147533817-d516a4d7-831a-4a7b-9b8e-57f806b711bd.png)
+
+- 그 후, qqplot을 그려서 시각적으로 표시한다.
+  ```R
+  # qplot 만들기
+  library(ggplot2)
+  qplot(disease.score$score, xlab = "감성 점수", ylab = "개수")+ 
+    geom_bar(color = 'black', fill = "skyblue")
+
+  # xlab와 ylab으로 x축, y축 이름 정해준다. 
+  # 그래프는 테두리가 검은색인 파란색 막대그래프를 그렸다.
+
+  # qplot 저장하기
+  ggsave(file = "C:/Users/XPS/Desktop/대학교 자료/공부/대학교/정보통계학과/3-2학기/빅데이터입문/기말과제/bargraph2.jpg", width = 3.5, height = 5)
+  ```
+![image](https://user-images.githubusercontent.com/49339278/147533863-c499b126-2170-488d-9cca-188cbe393767.png)
+
+### 5. 돼지고기 가격에 관한 감성분석
+- 흔히 돼지고기를 생각하면 삼겹살을 많이 떠올리게 된다. 그래서 검색어를 "돼지고기 가격"과 "삼겹살 가격"으로 지정한 후, 데이터프레임 형태이므로 rbind로 합치기로 하였다.
+  ```R
+  word1 <- enc2utf8("돼지고기 가격")
+  word2 <- enc2utf8("삼겹살 가격")
+
+  price1 <- searchTwitter(word1, n = 500, lang="ko")
+  price2 <- searchTwitter(word2, n = 500, lang="ko")
+
+  df_price1 <- do.call("rbind", lapply(price1, as.data.frame))
+  df_price2 <- do.call("rbind", lapply(price2, as.data.frame))
+  price <- rbind(df_price1, df_price2)
+
+
+  # 데이터 저장
+  write.csv(price$text, "돼지고기 가격 검색어 데이터.txt")
+  ```
+
+- 그 후, 감성분석을 실시하고, qqplot을 그렸다.
+  ```R
+  # 감성분석 실시
+  price.score <- score.sentiment(price$text, pos.words, neg.words)
+
+  table(price.score$score)
+  mean(price.score$score)
+
+  # qqplot 쓰기
+  library(ggplot2)
+  qplot(price.score$score, xlab = "감성 점수", ylab = "개수")+ 
+    geom_bar(color = 'black', fill = "skyblue")
+
+  # xlab, ylab으로 x축, y축 이름 정해줌
+  # 그래프는 테두리가 검은색인 파란색 히스토그램을 그렸다.
+
+  # qplot 저장하기
+  ggsave(file = "C:/Users/XPS/Desktop/대학교 자료/공부/대학교/정보통계학과/3-2학기/빅데이터입문/기말과제/bargraph3.jpg",
+      width = 3.5, height = 5)
+  ```
+![image](https://user-images.githubusercontent.com/49339278/147533971-1d72b2ff-7eb2-4014-8ffe-caead519b320.png)
+
+![image](https://user-images.githubusercontent.com/49339278/147533978-39ecc8e6-8dbc-47ee-8011-b00d1ba740a0.png)
+
+### 6. 결론
+- 아프리카 돼지열병에 관한 최다빈출 15개에 대한 빈도별 그래프와 워드클라우드를 보았을 때, ‘경기도’, ‘살처분’, ‘이재명’, ‘행사’, ‘매몰’, ‘정치’, ‘새끼’, ‘강물’, ‘농가’, ‘수십’, ‘정상’, ‘홍보’, ‘임진강’, ‘대표’, ‘국회의장’이라는 말이 많이 나오는 것을 알 수 있다.
+
+- 아프리카 돼지열병에 관한 감성분석에 대해서는 –4점이 1개, -2점이 197개, -1점이 1020개, 0점이 1513개, 1점이 204개, 2점이 265개로, 감성점수 평균은 –0.21375로 측정이 되었다. 감성점수가 0보다 작으므로 대체로 부정적인 의견(negative opinion)을 나타내는 것으로 간주할 수 있다.
+
+- 돼지고기 가격에 관한 감성분석에 대해서는 –2점이 2개, -1점이 17개, 0점이 195개, 1점이 14개, 2점이 6개, 3점이 1개로, 감성점수 평균이 0.03404255로 측정이 되었다. 감성점수가 0보다 크므로 대체로 긍정적 의견(positive opinion)을 나타내는 것으로 간주할 수 있다. 
+
 ### 7. 참고자료
+- 서론 부분
+http://goodnews1.com/news/news_view.asp?seq=91750 - 돼지열병 관련 뉴스기사
+http://www.mafra.go.kr/FMD-AI/1511/subview.do – 농림축산식품부 아프리카돼지열병 관련 자료
+- R코드 참고
+http://127.0.0.1:20482/library/twitteR/html/search.html - searchTwitter()에 관한 내용
+https://github.com/Lchiffon/wordcloud2/issues/8 - wordcloud2 저장하는 방법
+http://www.dodomira.com/2016/03/18/ggplot2-%EA%B8%B0%EC%B4%88/ - qqplot()에 대한 내용
+- 빅데이터입문 교재
